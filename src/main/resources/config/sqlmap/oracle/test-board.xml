@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.mlec.Board.BoardDAO">
+	<select id="boardSelect" resultType="board">
+		select board_no as boardNo, writer, title,
+		       date_format(reg_date, '%Y-%M-%D') as regDate
+		  from test_db.board
+		order by board_no desc
+	</select>
+</mapper>
