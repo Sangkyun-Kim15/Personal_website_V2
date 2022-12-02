@@ -16,4 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> boardSelect() throws Exception {
 		return boardDAO.boardSelect();
 	}
+
+	public BoardVO boardDetail(int boardNo) throws Exception {
+		return boardDAO.boardDetail(boardNo);
+	}
 }

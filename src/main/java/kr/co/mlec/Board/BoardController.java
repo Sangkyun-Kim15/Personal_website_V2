@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.mlec.VO.BoardVO;
@@ -22,6 +23,14 @@ public class BoardController {
 		List<BoardVO> list = service.boardSelect();
 		mav.addObject("list", list);
 		
+		return mav;
+	}
+	
+	@RequestMapping("/detail.do")
+	public ModelAndView boardDetail(@RequestParam(value="boardNo") int boardNo) throws Exception {
+		ModelAndView mav = new ModelAndView("board/detail");
+		BoardVO board = service.boardDetail(boardNo);
+		mav.addObject("board", board);
 		return mav;
 	}
 }

@@ -24,10 +24,9 @@
 		base-package="kr.co.mlec" />
 	<!-- AspectJ -->
 	<aop:aspectj-autoproxy />
-	<!-- mybatis
-	<context:property-placeholder order="1" ignore-unresolvable="true" location="classpath:config/mybatis/db.properties" />
-	-->
-	<context:property-placeholder ignore-unresolvable="true" location="file:/opt/tomcat/conf/db.properties" />
+	<!-- mybatis -->
+	<context:property-placeholder order="1" ignore-unresolvable="true" ignore-resource-not-found="true" location="classpath:config/mybatis/db.properties" />
+	<context:property-placeholder order="2" ignore-unresolvable="true" ignore-resource-not-found="true" location="file:/opt/tomcat/conf/db.properties" />
 	<!-- mySQL -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"

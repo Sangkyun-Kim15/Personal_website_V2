@@ -32,7 +32,7 @@
 		<c:forEach var="board" items="${list}">
 			<tr>
 				<td><c:out value="${board.boardNo}"></c:out></td>
-				<td><c:out value="${board.title}"></c:out></td>
+				<td><a href="<%=request.getContextPath()%>/board/detail.do?boardNo=${board.boardNo}"><c:out value="${board.title}"></c:out></a></td>
 				<td><c:out value="${board.writer}"></c:out></td>
 				<td><c:out value="${board.regDate}"></c:out></td>
 			</tr>

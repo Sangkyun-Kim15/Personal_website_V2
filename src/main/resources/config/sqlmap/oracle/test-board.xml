@@ -9,4 +9,11 @@
 		  from test_db.board
 		order by board_no desc
 	</select>
+	
+	<select id="boardDetail" parameterType="int" resultType="board">
+		select board_no as boardNo, writer, title, content,
+			   date_format(reg_date, '%Y-%M-%D') as regDate
+		  from test_db.board
+		 where board_no = #{boardNo}
+	</select>
 </mapper>

@@ -7,4 +7,6 @@ import kr.co.mlec.VO.BoardVO;
 public interface BoardService {
 	
 	public List<BoardVO> boardSelect() throws Exception;
+
+	public BoardVO boardDetail(int boardNo) throws Exception;
 }

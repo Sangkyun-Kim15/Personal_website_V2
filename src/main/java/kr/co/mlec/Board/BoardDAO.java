@@ -17,4 +17,8 @@ public class BoardDAO {
 	public List<BoardVO> boardSelect() {
 		return sqlSessionTemplate.selectList("kr.co.mlec.Board.BoardDAO.boardSelect");
 	}
+
+	public BoardVO boardDetail(int boardNo) {
+		return sqlSessionTemplate.selectOne("kr.co.mlec.Board.BoardDAO.boardDetail", boardNo);
+	}
 }
