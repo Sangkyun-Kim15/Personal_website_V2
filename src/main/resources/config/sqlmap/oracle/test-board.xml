@@ -16,4 +16,12 @@
 		  from test_db.board
 		 where board_no = #{boardNo}
 	</select>
+	
+	<insert id="boardInsert" parameterType="board">
+		insert into test_db.board(title, writer, content)
+		 values (#{title}, #{writer}, #{content})
+		 <selectKey resultType="int" keyProperty="boardNo" order="AFTER">
+    		select last_insert_id()
+    	</selectKey>
+	</insert>
 </mapper>

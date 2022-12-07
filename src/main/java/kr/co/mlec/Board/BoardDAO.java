@@ -21,4 +21,9 @@ public class BoardDAO {
 	public BoardVO boardDetail(int boardNo) {
 		return sqlSessionTemplate.selectOne("kr.co.mlec.Board.BoardDAO.boardDetail", boardNo);
 	}
+	
+	public int boardInsert(BoardVO board) {
+		sqlSessionTemplate.insert("kr.co.mlec.Board.BoardDAO.boardInsert", board);
+		return board.getBoardNo();
+	}
 }

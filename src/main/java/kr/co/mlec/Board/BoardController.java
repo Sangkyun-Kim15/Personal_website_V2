@@ -33,4 +33,12 @@ public class BoardController {
 		mav.addObject("board", board);
 		return mav;
 	}
+	
+	@RequestMapping("/insert.do")
+	public String boardInsert(BoardVO board) throws Exception {
+		ModelAndView mav = new ModelAndView("board/list");
+		service.boardInsert(board);
+		
+		return "redirect:select.do";
+	}
 }
