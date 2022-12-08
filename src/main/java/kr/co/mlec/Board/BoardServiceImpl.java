@@ -24,4 +24,12 @@ public class BoardServiceImpl implements BoardService {
 	public int boardInsert(BoardVO board) throws Exception {
 		return boardDAO.boardInsert(board);
 	}
+
+	public void boardDelete(int boardNo) throws Exception {
+		boardDAO.boardDelete(boardNo);
+	}
+
+	public void boardUpdate(BoardVO board) throws Exception {
+		boardDAO.boardUpdate(board);
+	}
 }

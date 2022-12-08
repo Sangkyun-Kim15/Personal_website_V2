@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.cj.x.protobuf.MysqlxNotice.SessionStateChanged.Parameter;
+
 import kr.co.mlec.VO.BoardVO;
 
 @Controller
@@ -40,5 +42,30 @@ public class BoardController {
 		service.boardInsert(board);
 		
 		return "redirect:select.do";
+	}
+	
+	@RequestMapping("/delete.do")
+	public String boardDelete(@RequestParam(value="boardNo") int boardNo) throws Exception{
+		ModelAndView mav = new ModelAndView("board/list");
+		service.boardDelete(boardNo);
+		
+		return "redirect:select.do?call=D";
+	}
+	
+	@RequestMapping("/updateForm.do")
+	public ModelAndView updateForm(@RequestParam(value="boardNo")int boardNo) throws Exception {
+		ModelAndView mav = new ModelAndView("board/updateForm");
+		BoardVO board = service.boardDetail(boardNo);
+		mav.addObject("board", board);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/update.do")
+	public String boardUpdate(BoardVO board) throws Exception {
+		ModelAndView mav = new ModelAndView("board/list");
+		service.boardUpdate(board);
+		
+		return "redirect:select.do?call=U";
 	}
 }

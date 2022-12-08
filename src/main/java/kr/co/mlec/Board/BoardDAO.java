@@ -26,4 +26,12 @@ public class BoardDAO {
 		sqlSessionTemplate.insert("kr.co.mlec.Board.BoardDAO.boardInsert", board);
 		return board.getBoardNo();
 	}
+	
+	public void boardDelete(int boardNo) {
+		sqlSessionTemplate.delete("kr.co.mlec.Board.BoardDAO.boardDelete", boardNo);
+	}
+	
+	public void boardUpdate(BoardVO board) {
+		sqlSessionTemplate.update("kr.co.mlec.Board.BoardDAO.boardUpdate", board);
+	}
 }
