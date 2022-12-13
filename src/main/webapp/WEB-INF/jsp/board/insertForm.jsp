@@ -13,6 +13,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- 
+<script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+ -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<h2>Adding</h2>
@@ -35,7 +39,8 @@
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Content</label>
 			<div class="col-sm-10">
-				<input type="text" name="content" class="form-control" placeholder="Content">
+			<!-- <input type="text" name="content" class="form-control" placeholder="Content">  -->
+				<textarea id="content" name="content"></textarea>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -44,5 +49,8 @@
     		</div>
     	</div>
 	</form>
+	<script type="text/javascript">
+		CKEDITOR.replace('content');
+	</script>
 </body>
 </html>

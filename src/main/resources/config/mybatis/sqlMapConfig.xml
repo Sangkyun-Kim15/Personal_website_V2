@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias alias="board" type="kr.co.mlec.VO.BoardVO" />
+		<typeAlias alias="comment" type="kr.co.mlec.VO.CommentVO" />
 	</typeAliases>
 
 </configuration>

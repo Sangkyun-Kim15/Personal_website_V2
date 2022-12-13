@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.mlec.Comment.CommentDAO">
+	<select id="commentSelect" parameterType="int" resultType="comment">
+		SELECT
+			c_id as cId,
+			b_id as bId,
+			user,
+			content,
+			date_format(created_date, '%Y-%M-%D') as createdDate,
+			date_format(updated_date, '%Y-%M-%D') as updatedDate,
+			is_deleted,
+			(SELECT
+				COUNT(*)
+			FROM
+				test_db.reply reply
+			WHERE
+				reply.c_id = comment.c_id) AS repNum
+		FROM
+			test_db.comment comment
+		WHERE
+			b_id = #{boardNo}
+	</select>
+	
+	<insert id="commentInsert" parameterType="comment">
+		INSERT INTO test_db.comment(b_id, user, content)
+			values(#{bId}, #{user}, #{content})
+	</insert>
+	
+</mapper>

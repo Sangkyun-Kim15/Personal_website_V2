@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mysql.cj.x.protobuf.MysqlxNotice.SessionStateChanged.Parameter;
 
+import kr.co.mlec.Comment.CommentService;
 import kr.co.mlec.VO.BoardVO;
+import kr.co.mlec.VO.CommentVO;
 
 @Controller
 @RequestMapping("/board")
@@ -18,6 +20,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@RequestMapping("/select.do")
 	public ModelAndView boardSelect() throws Exception {
@@ -31,25 +36,32 @@ public class BoardController {
 	@RequestMapping("/detail.do")
 	public ModelAndView boardDetail(@RequestParam(value="boardNo") int boardNo) throws Exception {
 		ModelAndView mav = new ModelAndView("board/detail");
+		
 		BoardVO board = service.boardDetail(boardNo);
+		List<CommentVO> list = commentService.commentSelect(boardNo);
+		
+		mav.addObject("list",list);
 		mav.addObject("board", board);
+		
 		return mav;
 	}
 	
 	@RequestMapping("/insert.do")
-	public String boardInsert(BoardVO board) throws Exception {
+	public ModelAndView boardInsert(BoardVO board) throws Exception {
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardInsert(board);
+		mav.setViewName("redirect:select.do");
 		
-		return "redirect:select.do";
+		return mav;
 	}
 	
 	@RequestMapping("/delete.do")
-	public String boardDelete(@RequestParam(value="boardNo") int boardNo) throws Exception{
+	public ModelAndView boardDelete(@RequestParam(value="boardNo") int boardNo) throws Exception{
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardDelete(boardNo);
+		mav.setViewName("redirect:select.do?call=D");
 		
-		return "redirect:select.do?call=D";
+		return mav;
 	}
 	
 	@RequestMapping("/updateForm.do")
@@ -62,10 +74,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String boardUpdate(BoardVO board) throws Exception {
+	public ModelAndView boardUpdate(BoardVO board) throws Exception {
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardUpdate(board);
+		mav.setViewName("redirect:select.do?call=U");
 		
-		return "redirect:select.do?call=U";
+		return mav;
 	}
 }

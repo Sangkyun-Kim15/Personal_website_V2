@@ -42,5 +42,45 @@
  		<a href="<%=request.getContextPath() %>/board/delete.do?boardNo=${board.boardNo}">Delete</a>
  </div>
  
+ <div>
+ 	<table class="table">
+		<tr>
+			<td><strong>c_id</strong></td>
+			<td><strong>p_id</strong></td>
+			<td><strong>b_id</strong></td>
+			<td><strong>User</strong></td>
+			<td><strong>Content</strong></td>
+			<td><strong>Depth</strong></td>
+			<td><strong>Date</strong></td>
+		</tr>
+		<c:forEach var="comment" items="${list}">
+			<tr>
+				<td><c:out value="${comment.cId}"></c:out></td>
+				<td><c:out value="${comment.bId}"></c:out></td>
+				<td><c:out value="${comment.user}"></c:out></td>
+				<td><c:out value="${comment.content}"></c:out></td>
+				<td><c:out value="${comment.isDeleted}"></c:out></td>
+				<td><c:out value="${comment.createdDate}"></c:out></td>
+				<td><c:out value="${comment.repNum}"></c:out></td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<form method="post" action="<%=request.getContextPath()%>/comment/insert.do">
+		<div>
+			<input type="hidden" name="bId" value='<c:out value="${board.boardNo}"/>' class="form-control"/>
+		</div>
+		<div>
+			<textarea name="content"></textarea>
+		</div>
+		<div>
+			<input type="text" name="user" class="form-control" placeholder="user"/>
+		</div>
+		<div>
+			<button type="submit" class="btn btn-primary"> add</button>
+		</div>
+	</form>
+ </div>
+ 
 </body>
 </html>
