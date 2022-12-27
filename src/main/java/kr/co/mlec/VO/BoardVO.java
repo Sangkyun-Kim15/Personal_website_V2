@@ -7,6 +7,7 @@ public class BoardVO {
 	private String content;
 	private String regDate;
 	private int cmtNum;
+	
 	public int getBoardNo() {
 		return boardNo;
 	}

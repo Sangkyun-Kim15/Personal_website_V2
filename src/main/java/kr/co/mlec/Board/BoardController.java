@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.cj.x.protobuf.MysqlxNotice.SessionStateChanged.Parameter;
-
-import kr.co.mlec.Comment.CommentService;
 import kr.co.mlec.VO.BoardVO;
-import kr.co.mlec.VO.CommentVO;
 
 @Controller
 @RequestMapping("/board")
@@ -21,8 +17,6 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	@Autowired
-	private CommentService commentService;
 	
 	@RequestMapping("/select.do")
 	public ModelAndView boardSelect() throws Exception {
@@ -38,9 +32,9 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("board/detail");
 		
 		BoardVO board = service.boardDetail(boardNo);
-		List<CommentVO> list = commentService.commentSelect(boardNo);
+		//List<CommentVO> list = commentService.commentSelect(boardNo);
 		
-		mav.addObject("list",list);
+		//mav.addObject("list",list);
 		mav.addObject("board", board);
 		
 		return mav;

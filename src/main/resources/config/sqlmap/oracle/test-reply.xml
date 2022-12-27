@@ -7,26 +7,56 @@
 		SELECT
 			c_id as cId,
 			b_id as bId,
+			p_id as pId,
 			user,
 			content,
 			date_format(created_date, '%Y-%M-%D') as createdDate,
 			date_format(updated_date, '%Y-%M-%D') as updatedDate,
-			is_deleted,
+			is_deleted as isDeleted,
 			(SELECT
 				COUNT(*)
 			FROM
-				test_db.reply reply
+				test_db.comment child
 			WHERE
-				reply.c_id = comment.c_id) AS repNum
+				child.p_id = parent.c_id) AS repNum
 		FROM
-			test_db.comment comment
+			test_db.comment parent
 		WHERE
-			b_id = #{boardNo}
+			b_id = #{boardNo} AND p_id IS NULL
 	</select>
+	
+	<select id="replySelect" parameterType="int" resultType="comment">
+		SELECT
+			c_id as cId,
+			b_id as bId,
+			p_id as pId,
+			user,
+			content,
+			date_format(created_date, '%Y-%M-%D') as createdDate,
+			date_format(updated_date, '%Y-%M-%D') as updatedDate,
+			is_deleted as isDeleted
+		FROM
+			test_db.comment
+		WHERE
+			p_id = #{cId}
+	</select>
+	
+	<insert id="replyInsert" parameterType="comment">
+		INSERT INTO test_db.comment(b_id, p_id, user, content)
+			values(#{bId}, #{cId}, #{user}, #{content})
+	</insert>
 	
 	<insert id="commentInsert" parameterType="comment">
 		INSERT INTO test_db.comment(b_id, user, content)
 			values(#{bId}, #{user}, #{content})
 	</insert>
 	
+	<update id="commentDelete" parameterType="int">
+		UPDATE
+			test_db.comment
+		SET
+			is_deleted = "Y"
+		WHERE
+			c_id = #{cId}
+	</update>
 </mapper>
