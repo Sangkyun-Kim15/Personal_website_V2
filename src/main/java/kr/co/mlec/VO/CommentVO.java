@@ -10,6 +10,7 @@ public class CommentVO {
 	private String updatedDate;
 	private String isDeleted;
 	private int repNum;
+	
 	public int getcId() {
 		return cId;
 	}

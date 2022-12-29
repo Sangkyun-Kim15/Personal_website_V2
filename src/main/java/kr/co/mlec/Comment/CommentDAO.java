@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mlec.VO.CommentVO;
-import kr.co.mlec.VO.ReplyVO;
 
 
 @Repository
@@ -20,7 +19,7 @@ public class CommentDAO {
 		return sqlSessionTemplate.selectList("kr.co.mlec.Comment.CommentDAO.commentSelect", boardNo);
 	}
 
-	public List<ReplyVO> replySelect(int cId) {
+	public List<CommentVO> replySelect(int cId) {
 		return sqlSessionTemplate.selectList("kr.co.mlec.Comment.CommentDAO.replySelect", cId);
 	}
 	

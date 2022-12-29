@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mlec.VO.CommentVO;
-import kr.co.mlec.VO.ReplyVO;
 
 
 @Service
@@ -19,7 +18,7 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.commentSelect(boardNo);
 	}
 	
-	public List<ReplyVO> replySelect(int cId) throws Exception {
+	public List<CommentVO> replySelect(int cId) throws Exception {
 		return commentDAO.replySelect(cId);
 	}
 

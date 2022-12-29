@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.mlec.VO.CommentVO;
-import kr.co.mlec.VO.ReplyVO;
 
 @Controller
 @RequestMapping("/comment")
@@ -54,8 +52,8 @@ public class CommentController {
 	
 	@RequestMapping("/replySelect.json")
 	@ResponseBody
-	public List<ReplyVO> replySelect(HttpServletRequest req) throws Exception {
-		List<ReplyVO> list = commentService.replySelect(Integer.parseInt(req.getParameter("cId")));
+	public List<CommentVO> replySelect(HttpServletRequest req) throws Exception {
+		List<CommentVO> list = commentService.replySelect(Integer.parseInt(req.getParameter("cId")));
 		return list;
 	}
 	

@@ -80,7 +80,7 @@ $(document).on("click", ".commentDel", function() {
         })
 	});
 
-//  reply insult function
+//  reply insert function
 $(document).on("click", ".reCommentSubmit", function () {
 	const _this = $(this);
 	const content = $(this).siblings('.reComment').val();
