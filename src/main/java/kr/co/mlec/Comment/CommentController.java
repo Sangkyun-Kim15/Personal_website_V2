@@ -42,6 +42,15 @@ public class CommentController {
 		commentService.commentDelete(cId);
 		return null;
 	}
+	/*
+	 *  change return type to check return data
+	 * */
+	@ResponseBody
+	@RequestMapping("/commentUpdate.json")
+	public String commentUpdate(CommentVO comment) throws Exception {
+		commentService.commentUpdate(comment);
+		return null;
+	}
 	
 	@RequestMapping("/replySelect.json")
 	@ResponseBody

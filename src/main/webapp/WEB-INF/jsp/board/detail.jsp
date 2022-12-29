@@ -15,6 +15,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- modal.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board/modal.js"></script>
+<!-- comment.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board/comment.js"></script>
 <script>
 	$(document).ready(function() {
 		commentList();
@@ -34,14 +38,14 @@
 			 response.forEach(function(comment) {
 				 
 				html += "<div class='mb-2'>";
-	            html += 	"<input type='hidden' id='comment_bId' value='" + ${board.boardNo} + "'>"
-	            html += 	"<input type='hidden' id='comment_cId' value='" + comment.cId + "'>"
+	            html += 	"<input type='hidden' id='comment_bId' value='" + ${board.boardNo} + "'>";
+	            html += 	"<input type='hidden' id='comment_cId' value='" + comment.cId + "'>";
 	            html += 	"<b id='commentWriter_" + comment.cId + "'>" + comment.user + "</b>";
 	            html += 	"<span style='float:right;' align='right' id='commentDate_"+ comment.cId +"'> " + comment.createdDate + " </span>";
-	            html += 	"<div class='mb-1 comment_container' >"
+	            html += 	"<div class='mb-1 comment_container' >";
 	            html += 		"<h5 id='commentText_" + comment.cId + "' style='display: inline'>" + comment.content +"</h5>";
-	            html += 		"<span id='ccCount_" + comment.cId + "' style='color: red'> ["+comment.repNum+"]</span>"
-	            html += 	"</div>"
+	            html += 		"<span id='ccCount_" + comment.cId + "' style='color: red'> ["+comment.repNum+"]</span>";
+	            html += 	"</div>";
 	            html += 	"<span style='cursor: pointer; color: blue' class='reCommentBtn' id='reCommentBtn_"+ comment.cId +"'>답글 달기 </span>";
 	            html += 	"<span style='display:none; cursor: pointer; color: blue' class='reCommentCloseBtn' id='reCommentCloseBtn_"+ comment.cId +"'>답글 닫기 </span>";
 	            html += 	"<span style='cursor: pointer; color: blue' class='commentMod' data-toggle='modal' data-target='#myModal'>수정 </span>";
@@ -50,117 +54,9 @@
                 html += 	"<div class='mx-4 reCommentDiv' id='reCommentDiv_" + comment.cId + "'></div>";
                 html += "</div>";
 			 });
-			 $("#commentList").html(html)
+			 $("#commentList").html(html);
 		 });
 	}
-	
-	$(document).on("click", ".commentDel", function() {
-		// comment delete
-		const _this = $(this);
-		const cId =  $(this).siblings('#comment_cId').val();
-		
-		$.ajax({
-			url: "../comment/commentDelete.json",
-	        dataType: "json",
-	        data: {"cId": cId}
-		})
-		.done(function() {
-        	console.log("success");
-        	commentList();
-        })
-        .fail(function() {
-        	console.log("fail");
-        })
-        .always(function() {
-        	console.log("always");
-        })
-	});
-	
-	$(document).on("click", ".commentMod", function() {
-		// comment update form
-		const _this = $(this);
-		const cId =  $(this).siblings('#comment_cId').val();
-		const comment_text = $(this).siblings('.comment_container').children('h5').text();
-		const comment_user = $(this).siblings('b').text();
-		
-		console.log(cId);
-		console.log(comment_text);
-		console.log(comment_user);
-		
-	});
-	
-	//reply list
-	$(document).on("click", ".reCommentBtn", function() {
-		const _this = $(this);
-		const bId = $(this).siblings('#comment_bId').val();
-		const cId = $(this).siblings('#comment_cId').val();
-		console.log(bId);
-		console.log(cId);
-		// ?
-	    _this.siblings('.reCommentDiv').show();
-	    _this.hide();
-	    _this.siblings('.reCommentCloseBtn').show();
-	    
-	    $.ajax({
-	    	type: "get",
-	        url: "../comment/replySelect.json",
-	        dataType: "json",
-	        data: {"cId": cId}
-	    })
-	    .done(function(response) {
-	    	console.log(response)
-			let html = "";
-	    	
-	    	response.forEach(function(comment) {
-	    		html += "<div class='mb-2'>";
-                html += "<input type='hidden' id='commentId_"+ comment.cId +"' value='" + comment.cId + "'>"
-                html += "<b id='commentWriter_" + comment.cId + "' >" + comment.user + "</b>";
-                html += "<span style='float:right;' align='right' id='commentDate'> " + comment.createdDate + " </span>";
-                html += "<h5 id='commentText_"+ comment.cId +"'>" + comment.content + "</h5>";
-                html += "<hr></div>";
-	    	});
-            html += "<input type='hidden' id='reply_bId' value='" + bId + "'>"
-            html += "<input type='hidden' id='reply_cId' value='" + cId + "'>"
-            html += "<input type='hidden' id='reply_user' value='tester'>"
-	    	html += "<input style='width: 90%' id='reComment_"+cId+"' class='reComment' name='reComment' placeholder='댓글을 입력해 주세요'>";
-            html += "<button type='button' class='btn btn-primary mx-2 reCommentSubmit'>등록</button>";
-            
-	    	_this.siblings(".reCommentDiv").html(html);
-	    })
-	    .fail(function() {
-        	console.log("fail");
-        })
-        .always(function() {
-        	console.log("always");
-        });
-	});
-	
-	$(document).on("click", ".reCommentSubmit", function () {
-		const _this = $(this);
-		const content = $(this).siblings('.reComment').val();
-		const bId = $(this).siblings('#reply_bId').val();
-		const cId = $(this).siblings('#reply_cId').val();
-		const user = $(this).siblings('#reply_user').val();
-		
-		$.ajax({
-            type: 'post',
-            url: "../comment/insert.json",
-	        dataType: "json",
-            data: {"bId": bId, "cId": cId, "content": content, "user": user},
-        })
-        .done(function() {
-        	let html = "";
-        	console.log("success");
-        	commentList();
-        })
-        .fail(function() {
-        	console.log("fail");
-        })
-        .always(function() {
-        	console.log("always");
-        })
-	});
-	
 </script>
 </head>
 <body>

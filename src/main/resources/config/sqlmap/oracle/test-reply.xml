@@ -59,4 +59,13 @@
 		WHERE
 			c_id = #{cId}
 	</update>
+	
+	<update id="commentUpdate" parameterType="comment">
+		UPDATE
+			test_db.comment
+		SET
+			content = #{content}
+		WHERE
+			c_id = #{cId}
+	</update>
 </mapper>

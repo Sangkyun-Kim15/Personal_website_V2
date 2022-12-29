@@ -35,4 +35,8 @@ public class CommentDAO {
 	public void commentDelete(int cId) {
 		sqlSessionTemplate.update("kr.co.mlec.Comment.CommentDAO.commentDelete", cId);
 	}
+	
+	public void commentUpdate(CommentVO comment) {
+		sqlSessionTemplate.update("kr.co.mlec.Comment.CommentDAO.commentUpdate", comment);
+	}
 }

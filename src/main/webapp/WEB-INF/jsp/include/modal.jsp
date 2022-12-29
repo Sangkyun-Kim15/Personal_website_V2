@@ -16,6 +16,7 @@
 					<h4 id="modal-title" class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
+					<input class="form-control" id="cId" type="hidden">
 					<table class="table">
 						<tr>
 							<td>User</td>
@@ -23,7 +24,7 @@
 						</tr>
 						<tr>
 							<td>Content</td>
-							<td><textarea class="form-control" id="contents" rows="10"></textarea></td>
+							<td><textarea class="form-control" id="content" rows="10"></textarea></td>
 						</tr>
 					</table>
 				</div>

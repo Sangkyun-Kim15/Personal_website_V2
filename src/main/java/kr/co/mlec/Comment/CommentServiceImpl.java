@@ -34,4 +34,8 @@ public class CommentServiceImpl implements CommentService {
 	public void commentDelete(int cId) throws Exception {
 		commentDAO.commentDelete(cId);
 	}
+
+	public void commentUpdate(CommentVO comment) throws Exception {
+		commentDAO.commentUpdate(comment);
+	}
 }
