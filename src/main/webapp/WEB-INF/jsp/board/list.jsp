@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>Blog test</title>
 <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
 	if("${msg}") {
@@ -22,6 +22,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<jsp:include page="../include/menu.jsp" />
 	<table class="table">
 		<tr>
 			<td><strong>No</strong></td>
@@ -38,7 +39,13 @@
 			</tr>
 		</c:forEach>
 	</table>
-		<br/>
-		<a href="<%=request.getContextPath() %>/board/insertForm.do">Add</a>
+	<br/>
+	<c:choose>
+		<c:when test="${empty sessionScope.username}">
+		</c:when>
+		<c:otherwise>
+			<a href="<%=request.getContextPath() %>/board/insertForm.do">Add</a>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

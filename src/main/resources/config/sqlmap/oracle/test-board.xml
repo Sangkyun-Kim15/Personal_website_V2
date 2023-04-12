@@ -4,15 +4,23 @@
 	
 <mapper namespace="kr.co.mlec.Board.BoardDAO">
 	<select id="boardSelect" resultType="board">
-		select board_no as boardNo, writer, title,
-		       date_format(reg_date, '%Y-%M-%D') as regDate
-		  from test_db.board
+		select 
+			board_no as boardNo,
+			writer,
+			title,
+			date_format(reg_date, '%Y-%M-%D') as regDate,
+			is_deleted as isDeleted
+		FROM 
+			test_db.board
+		WHERE 
+		  	is_deleted = "N"
 		order by board_no desc
 	</select>
 	
 	<select id="boardDetail" parameterType="int" resultType="board">
 		select board_no as boardNo, writer, title, content,
-			   date_format(reg_date, '%Y-%M-%D') as regDate
+			   date_format(reg_date, '%Y-%M-%D') as regDate,
+			   is_deleted as isDeleted
 		  from test_db.board
 		 where board_no = #{boardNo}
 	</select>
@@ -25,11 +33,14 @@
     	</selectKey>
 	</insert>
 	
-	<delete id="boardDelete" parameterType="int">
-		delete
-		  from test_db.board
-		 where board_no = #{boardNo}
-	</delete>
+	<update id="boardDelete" parameterType="int">
+		UPDATE
+			test_db.board
+		SET
+			is_deleted = "Y"
+		WHERE 
+			board_no = #{boardNo}
+	</update>
 	
 	<update id="boardUpdate" parameterType="board">
 		update test_db.board

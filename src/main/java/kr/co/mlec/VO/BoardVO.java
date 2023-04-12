@@ -50,3 +50,4 @@ public class BoardVO {
 				+ ", regDate=" + regDate + ", cmtNum=" + cmtNum + "]";
 	}
 }
+

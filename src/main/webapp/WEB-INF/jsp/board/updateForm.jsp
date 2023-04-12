@@ -16,8 +16,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
+	<jsp:include page="../include/menu.jsp" />
 	<h2>Updating</h2>
 	<form method="post" action="<%=request.getContextPath()%>/board/update.do">
 		<input type="hidden" name="boardNo" value="${board.boardNo}">
@@ -36,7 +38,7 @@
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Content</label>
 			<div class="col-sm-10">
-				<input type="text" name="content" value='<c:out value="${board.content}"/>' class="form-control" >
+				<textarea id="content" class="form-control" ><c:out value="${board.content}"/></textarea>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -45,5 +47,8 @@
     		</div>
     	</div>
 	</form>
+	<script type="text/javascript">
+		CKEDITOR.replace('content');
+	</script>
 </body>
 </html>

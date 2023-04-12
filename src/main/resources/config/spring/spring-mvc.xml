@@ -80,8 +80,9 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
-	<mvc:view-controller path="/board/insertForm.do" view-name="board/insertForm"/>
 	<mvc:view-controller path="/main.do" view-name="main" />
+	<mvc:view-controller path="/account/loginForm.do" view-name="account/loginForm" />
+	<mvc:view-controller path="/board/insertForm.do" view-name="board/insertForm" />
 
 	<mvc:default-servlet-handler />
 

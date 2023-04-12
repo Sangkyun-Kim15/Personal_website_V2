@@ -18,11 +18,11 @@
 			FROM
 				test_db.comment child
 			WHERE
-				child.p_id = parent.c_id) AS repNum
+				child.p_id = parent.c_id AND is_deleted = "N") AS repNum
 		FROM
 			test_db.comment parent
 		WHERE
-			b_id = #{boardNo} AND p_id IS NULL
+			b_id = #{boardNo} AND p_id IS NULL AND is_deleted = "N"
 	</select>
 	
 	<select id="replySelect" parameterType="int" resultType="comment">
@@ -38,7 +38,7 @@
 		FROM
 			test_db.comment
 		WHERE
-			p_id = #{cId}
+			p_id = #{cId} AND is_deleted = "N"
 	</select>
 	
 	<insert id="replyInsert" parameterType="comment">

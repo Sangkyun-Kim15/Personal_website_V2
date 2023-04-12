@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- jstl c tag -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
+	<jsp:include page="../include/menu.jsp" />
 	<h2>Adding</h2>
 	<form method="post" action="<%=request.getContextPath()%>/board/insert.do">
 		<div class="form-group row">
@@ -30,16 +33,12 @@
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Writer</label>
 			<div class="col-sm-10">
-				<!--
-					<input type="text" name="writer" value='${sessionScope.id}' class="form-control" placeholder="Writer" readonly> 
-				 -->
-				 <input type="text" name="writer" class="form-control" placeholder="Writer">
+				 <input type="text" name="writer" class="form-control" value="${sessionScope.username}" readonly="readonly"/>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Content</label>
 			<div class="col-sm-10">
-			<!-- <input type="text" name="content" class="form-control" placeholder="Content">  -->
 				<textarea id="content" name="content"></textarea>
 			</div>
 		</div>

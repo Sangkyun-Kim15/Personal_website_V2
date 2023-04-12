@@ -20,7 +20,7 @@
 					<table class="table">
 						<tr>
 							<td>User</td>
-							<td><input class="form-control" id="userName" type="text"></td>
+							<td><input class="form-control" id="userName" type="text" value="${sessionScope.username}" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td>Content</td>
