@@ -1,4 +1,3 @@
-
 // reply list button
 $(document).on("click", ".reCommentCloseBtn", function() {
 	const _this = $(this);
@@ -12,6 +11,7 @@ $(document).on("click", ".commentDel", function() {
 	// comment delete
 	const _this = $(this);
 	const cId =  $(this).siblings('#comment_cId').val();
+	const currPage = $(this).siblings('#curr_page').val();
 	
 	$.ajax({
 		url: "../comment/commentDelete.json",
@@ -26,7 +26,7 @@ $(document).on("click", ".commentDel", function() {
     })
     .always(function() {
     	console.log("always");
-    	commentList();
+    	history.go(0);
     })
 });
 

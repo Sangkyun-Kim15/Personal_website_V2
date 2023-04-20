@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,14 @@ public class CommentController {
 	@ResponseBody
 	public List<CommentVO> commentSelect(HttpServletRequest req) throws Exception {
 		List<CommentVO> list = commentService.commentSelect(Integer.parseInt(req.getParameter("boardNo")));
+		return list;
+	}
+	
+	@RequestMapping("/commentSelectByUser.json")
+	@ResponseBody
+	public List<CommentVO> commentSelectByUser(@RequestParam(value="username") String username) throws Exception {
+		List<CommentVO> list = commentService.commentSelectByUser(username);
+		
 		return list;
 	}
 	

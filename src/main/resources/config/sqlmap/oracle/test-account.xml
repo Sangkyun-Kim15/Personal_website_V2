@@ -8,8 +8,22 @@
 			username, 
 			password,
 			date_format(created_date, '%Y-%M-%D') as createdDate,
+			role,
 			is_deleted as isDeleted
 		FROM
 			test_db.account
+	</select>
+	
+	<select id="accountDetail" parameterType="String" resultType="account">
+		SELECT
+			username,
+			password,
+			date_format(created_date, '%Y-%M-%D') as createdDate,
+			role,
+			is_deleted as isDeleted
+		FROM
+			test_db.account
+		WHERE
+			username = #{userName}
 	</select>
 </mapper>

@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$("#log").click(function() {
 		$.ajax({
 			type: "POST",
-		    url:"<%=request.getContextPath()%>/account/select.do",
+		    url:"<%=request.getContextPath()%>/account/check.do",
 		    dataType:"json"
 		})
 		.done(function(response) {

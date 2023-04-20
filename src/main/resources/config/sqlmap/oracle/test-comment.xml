@@ -41,6 +41,22 @@
 			p_id = #{cId} AND is_deleted = "N"
 	</select>
 	
+	<select id="commentSelectByUser" parameterType="String" resultType="comment">
+		SELECT
+			c_id as cId,
+			b_id as bId,
+			p_id as pId,
+			user,
+			content,
+			date_format(created_date, '%Y-%M-%D') as createdDate,
+			date_format(updated_date, '%Y-%M-%D') as updatedDate,
+			is_deleted as isDeleted
+		FROM
+			test_db.comment
+		WHERE
+			user = #{username}
+	</select>
+	
 	<insert id="replyInsert" parameterType="comment">
 		INSERT INTO test_db.comment(b_id, p_id, user, content)
 			values(#{bId}, #{cId}, #{user}, #{content})

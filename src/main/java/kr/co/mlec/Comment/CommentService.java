@@ -18,4 +18,6 @@ public interface CommentService {
 	public void commentDelete(int cId) throws Exception;
 	
 	public void commentUpdate(CommentVO comment) throws Exception;
+
+	public List<CommentVO> commentSelectByUser(String username);
 }

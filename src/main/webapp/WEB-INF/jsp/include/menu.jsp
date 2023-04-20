@@ -28,11 +28,26 @@
 						<li><a href="<%=request.getContextPath() %>/board/select.do">Home</a></li>
 						<li><a href="<%=request.getContextPath() %>/account/loginForm.do">Login Test</a></li>
 					</c:when>
-			<c:otherwise>
-						<li><a href="<%=request.getContextPath() %>/board/select.do">Home</a></li>
-						<li><a href="<%=request.getContextPath() %>/account/logout.do?username=${sessionScope.username}">Logout Test</a></li>
-			</c:otherwise>
-		</c:choose>
+					<c:otherwise>
+						<%
+							String role = (String) session.getAttribute("role");
+							
+							if(role.equals("ADMIN")) {
+						%>
+							<li><a href="<%=request.getContextPath() %>/board/select.do">Home</a></li>
+							<li><a href="<%=request.getContextPath() %>/account/logout.do?username=${sessionScope.username}">Logout Test</a></li>
+							<li><a href="<%=request.getContextPath() %>/account/select.do">Admin</a></li>
+						
+						<%
+							} else {
+						%>
+							<li><a href="<%=request.getContextPath() %>/board/select.do">Home</a></li>
+							<li><a href="<%=request.getContextPath() %>/account/logout.do?username=${sessionScope.username}">Logout Test</a></li>
+						<%
+							}
+						%>
+					</c:otherwise>
+				</c:choose>	
 			</ul>
 		</div>
 	</nav>

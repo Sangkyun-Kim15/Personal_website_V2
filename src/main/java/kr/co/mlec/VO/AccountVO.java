@@ -4,6 +4,8 @@ public class AccountVO {
 	private String username;
 	private String password;
 	private String createdDate;
+	private String role;
+	private String isDeleted;
 
 	public String getUsername() {
 		return username;
@@ -29,8 +31,25 @@ public class AccountVO {
 		this.createdDate = createdDate;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	@Override
 	public String toString() {
-		return "AccountVO [username=" + username + ", password=" + password + ", createdDate=" + createdDate + "]";
+		return "AccountVO [username=" + username + ", password=" + password + ", createdDate=" + createdDate + ", role="
+				+ role + ", isDeleted=" + isDeleted + "]";
 	}
 }

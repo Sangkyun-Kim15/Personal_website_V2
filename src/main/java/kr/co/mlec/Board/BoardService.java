@@ -15,4 +15,6 @@ public interface BoardService {
 	public void boardDelete(int boardNo) throws Exception;
 	
 	public void boardUpdate(BoardVO board) throws Exception;
+
+	public List<BoardVO> boardSelectByUser(String username);
 }

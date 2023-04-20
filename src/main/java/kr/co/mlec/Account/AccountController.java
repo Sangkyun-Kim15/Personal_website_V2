@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,22 +19,33 @@ import kr.co.mlec.VO.AccountVO;
 public class AccountController {
 	
 	@Autowired
-	private AccountService service;
+	private AccountService accountService;
 	
 	@RequestMapping("/login.do")
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse res, AccountVO account) throws Exception {
 		HttpSession session = req.getSession();
 		String username = account.getUsername();
+		AccountVO accountDetail = accountService.accountDetail(username);
 		session.setAttribute("username", username);
+		session.setAttribute("role", accountDetail.getRole());
 		ModelAndView mav = new ModelAndView("main");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/select.do")
+	public ModelAndView accountSelect() throws Exception {
+		ModelAndView mav = new ModelAndView("admin/admin_user");
+		List<AccountVO> list = accountService.select();
+		mav.addObject("list", list);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/check.do")
 	@ResponseBody
 	public List<AccountVO> select() throws Exception{
-		List<AccountVO> list = service.select();
+		List<AccountVO> list = accountService.select();
 		
 		return list;
 	}

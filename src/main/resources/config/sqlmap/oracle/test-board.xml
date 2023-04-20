@@ -11,9 +11,23 @@
 			date_format(reg_date, '%Y-%M-%D') as regDate,
 			is_deleted as isDeleted
 		FROM 
-			test_db.board
+			test_db.board parent
 		WHERE 
 		  	is_deleted = "N"
+		order by board_no desc
+	</select>
+	
+	<select id="boardSelectByUser" parameterType="String" resultType="board">
+		select 
+			board_no as boardNo,
+			writer,
+			title,
+			date_format(reg_date, '%Y-%M-%D') as regDate,
+			is_deleted as isDeleted
+		FROM 
+			test_db.board parent
+		WHERE 
+		  	writer = #{username}
 		order by board_no desc
 	</select>
 	

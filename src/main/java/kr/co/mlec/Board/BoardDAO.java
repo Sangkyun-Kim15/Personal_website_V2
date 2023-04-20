@@ -34,4 +34,9 @@ public class BoardDAO {
 	public void boardUpdate(BoardVO board) {
 		sqlSessionTemplate.update("kr.co.mlec.Board.BoardDAO.boardUpdate", board);
 	}
+
+	public List<BoardVO> boardSelectByUser(String username) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("kr.co.mlec.Board.BoardDAO.boardSelectByUser", username);
+	}
 }

@@ -38,4 +38,8 @@ public class CommentDAO {
 	public void commentUpdate(CommentVO comment) {
 		sqlSessionTemplate.update("kr.co.mlec.Comment.CommentDAO.commentUpdate", comment);
 	}
+
+	public List<CommentVO> commentSelectByUser(String username) {
+		return sqlSessionTemplate.selectList("kr.co.mlec.Comment.CommentDAO.commentSelectByUser", username);
+	}
 }

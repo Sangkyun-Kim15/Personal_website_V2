@@ -16,13 +16,14 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- modal.js file -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board/comment_update_modal.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment_update_modal.js"></script>
 <!-- comment.js file -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board/comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment.js"></script>
 <script>
 	$(document).ready(function() {
 		commentList();
 	});
+	
 	// comment list
 	function commentList() {
 		 $.ajax({
@@ -34,11 +35,12 @@
 		 .done(function(response) {
 			 console.log(response)
 			 var username = '<%=(String)session.getAttribute("username")%>';
+			 var role = '<%=(String)session.getAttribute("role")%>';
 			 let html = "";
 			 console.log(username)
 			 
 			 response.forEach(function(comment) {
-				 if(username == comment.user) {
+				 if(username == comment.user || role == "ADMIN") {
 					 html += "<div class='mb-2'>";
 		             html += 	"<input type='hidden' id='comment_bId' value='" + ${board.boardNo} + "'>";
 		             html += 	"<input type='hidden' id='comment_cId' value='" + comment.cId + "'>";
@@ -84,6 +86,7 @@
 		const bId = $(this).siblings('#comment_bId').val();
 		const cId = $(this).siblings('#comment_cId').val();
 		var username = '<%=(String)session.getAttribute("username")%>';
+		var role = '<%=(String)session.getAttribute("role")%>';
 		console.log(username)
 		// ?
 	    _this.siblings('.reCommentDiv').show();
@@ -101,7 +104,7 @@
 			let html = "";
 	    	
 	    	response.forEach(function(comment) {
-	    		if(username == comment.user) {
+	    		if(username == comment.user  || role == "ADMIN") {
 		    		html += "<div class='mb-2'>";
 		            html += 	"<input type='hidden' id='comment_cId' value='" + comment.cId + "'>";
 		            html += 	"<b id='commentWriter_" + comment.cId + "' >" + comment.user + "</b>";
@@ -141,11 +144,13 @@
 	    .fail(function() {
 	    	console.log("fail");
 	    })
-	});
+	});		 
+	
 </script>
 </head>
 <body>
 	<jsp:include page="../include/menu.jsp" />
+	<jsp:include page="../board/comment_update_modal.jsp" />
 	<div>
 	 <table class = "table">
 	 	<tr>
@@ -166,7 +171,7 @@
  </div>
  <div>
  	<c:choose>
-		<c:when test="${sessionScope.username eq board.writer}">
+		<c:when test="${sessionScope.username eq board.writer or sessionScope.role eq 'ADMIN'}">
 	 		<a href="<%=request.getContextPath() %>/board/updateForm.do?boardNo=${board.boardNo}">Update</a>
 	 		<a href="<%=request.getContextPath() %>/board/delete.do?boardNo=${board.boardNo}">Delete</a>
 		</c:when>
@@ -190,6 +195,5 @@
  </div>
  <div id="commentList"></div>
  	
-<jsp:include page="../board/comment_update_modal.jsp" />
 </body>
 </html>

@@ -18,4 +18,9 @@ public class AccountServiceImpl implements AccountService{
 		return accountDAO.select();
 	}
 
+	@Override
+	public AccountVO accountDetail(String userName) throws Exception {
+		return accountDAO.accountDetail(userName);
+	}
+
 }

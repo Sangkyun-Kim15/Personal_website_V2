@@ -18,4 +18,8 @@ public class AccountDAO {
 		return sqlSessionTemplate.selectList("kr.co.mlec.Account.AccountDAO.select");
 	}
 
+	public AccountVO accountDetail(String userName) {
+		return sqlSessionTemplate.selectOne("kr.co.mlec.Account.AccountDAO.accountDetail", userName);
+	}
+
 }
