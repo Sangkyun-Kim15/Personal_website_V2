@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mlec.VO.BoardVO;
+import kr.co.mlec.VO.CriteriaVO;
 
 @Repository
 public class BoardDAO {
@@ -36,7 +37,18 @@ public class BoardDAO {
 	}
 
 	public List<BoardVO> boardSelectByUser(String username) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("kr.co.mlec.Board.BoardDAO.boardSelectByUser", username);
+	}
+
+	public int getBoardTotalNum(CriteriaVO cri) {
+		return (int)sqlSessionTemplate.selectOne("kr.co.mlec.Board.BoardDAO.getBoardTotalNum", cri);
+	}
+
+	public List<BoardVO> boardSelectPaging(CriteriaVO cri) {
+		return sqlSessionTemplate.selectList("kr.co.mlec.Board.BoardDAO.boardSelectPaging", cri);
+	}
+
+	public int getBoardTotalNumByUser(String username) {
+		return sqlSessionTemplate.selectOne("kr.co.mlec.Board.BoardDAO.getBoardTotalNumByUser", username);
 	}
 }

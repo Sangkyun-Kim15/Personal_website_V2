@@ -31,8 +31,12 @@ $(document).ready(function() {
 					<h4 id="modal-title" class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<div id="boardListByUser"></div>
-					<div id="comListByUser"></div>
+					<h4>Board</h4>
+					<div id="boardListByUser" style="overflow: scroll; height: 320px"></div>
+					<div id="boardTotal"></div>
+					<h4>Comment</h4>
+					<div id="comListByUser" style="overflow: scroll; height: 320px"></div>
+					<div id="commentTotal"></div>
 				</div>
 				<div class="modal-footer">
 					<button id="modalSubmit" type="button" class="btn btn-success">Submit</button>

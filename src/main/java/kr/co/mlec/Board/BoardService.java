@@ -3,6 +3,7 @@ package kr.co.mlec.Board;
 import java.util.List;
 
 import kr.co.mlec.VO.BoardVO;
+import kr.co.mlec.VO.CriteriaVO;
 
 public interface BoardService {
 	
@@ -16,5 +17,12 @@ public interface BoardService {
 	
 	public void boardUpdate(BoardVO board) throws Exception;
 
-	public List<BoardVO> boardSelectByUser(String username);
+	public List<BoardVO> boardSelectByUser(String username) throws Exception;
+	
+	public int getBoardTotalNum(CriteriaVO cri) throws Exception;
+
+	public List<BoardVO> boardSelectPaging(CriteriaVO cri) throws Exception;
+
+	public int getBoardTotalNumByUser(String username) throws Exception;
+
 }

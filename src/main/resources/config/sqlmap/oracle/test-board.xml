@@ -62,4 +62,51 @@
     			content = #{content}
     	 where board_no = #{boardNo}
 	</update>
+	
+	<select id="getBoardTotalNum" parameterType="criteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			test_db.board
+		<if test="keyword != null">
+			WHERE
+				title LIKE concat('%', #{keyword}, '%')
+				AND
+				is_deleted = "N"
+		</if>
+		<if test="keyword == null">
+				WHERE 
+			  		is_deleted = "N"
+		</if>
+	</select>
+	
+	<select id="boardSelectPaging" parameterType="criteria" resultType="board">
+		SELECT
+			*
+		FROM
+			( 
+				SELECT
+					board_no as boardNo,
+					writer,
+					title,
+					date_format(reg_date, '%Y-%M-%D') as regDate,
+					is_deleted as isDeleted
+				FROM
+					test_db.board
+				<if test="keyword != null">
+					WHERE
+						title LIKE concat('%', #{keyword}, '%')
+						AND
+						is_deleted = "N"
+				</if>
+				<if test="keyword == null">
+					WHERE 
+			  			is_deleted = "N"
+				</if>
+				ORDER BY
+					board_no desc
+			) AS T1
+		LIMIT
+			#{skip}, #{amount}
+	</select>
 </mapper>

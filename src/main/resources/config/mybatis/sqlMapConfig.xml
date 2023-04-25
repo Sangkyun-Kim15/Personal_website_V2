@@ -8,6 +8,7 @@
 		<typeAlias alias="board" type="kr.co.mlec.VO.BoardVO" />
 		<typeAlias alias="comment" type="kr.co.mlec.VO.CommentVO" />
 		<typeAlias alias="account" type="kr.co.mlec.VO.AccountVO" />
+		<typeAlias alias="criteria" type="kr.co.mlec.VO.CriteriaVO" />
 	</typeAliases>
 
 </configuration>

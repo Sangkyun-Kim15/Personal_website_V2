@@ -25,13 +25,16 @@
 	<!-- AspectJ -->
 	<aop:aspectj-autoproxy />
 	<!-- mybatis -->
-	<context:property-placeholder order="1" ignore-unresolvable="true" ignore-resource-not-found="true" location="classpath:config/mybatis/db.properties" />
-	<context:property-placeholder order="2" ignore-unresolvable="true" ignore-resource-not-found="true" location="file:/opt/tomcat/conf/db.properties" />
+	<context:property-placeholder order="1"
+		ignore-unresolvable="true" ignore-resource-not-found="true"
+		location="classpath:config/mybatis/db.properties" />
+	<context:property-placeholder order="2"
+		ignore-unresolvable="true" ignore-resource-not-found="true"
+		location="file:/opt/tomcat/conf/db.properties" />
 	<!-- mySQL -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="${jdbc.oracle.url}" 
+		p:driverClassName="com.mysql.jdbc.Driver" p:url="${jdbc.oracle.url}"
 		p:username="${jdbc.oracle.username}"
 		p:password="${jdbc.oracle.password}" />
 	<!-- transaction -->
@@ -79,10 +82,13 @@
 
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	
-	<mvc:view-controller path="/main.do" view-name="main" />
-	<mvc:view-controller path="/account/loginForm.do" view-name="account/loginForm" />
-	<mvc:view-controller path="/board/insertForm.do" view-name="board/insertForm" />
+
+	<mvc:view-controller path="/main.do"
+		view-name="main" />
+	<mvc:view-controller path="/account/loginForm.do"
+		view-name="account/loginForm" />
+	<mvc:view-controller path="/board/insertForm.do"
+		view-name="board/insertForm" />
 
 	<mvc:default-servlet-handler />
 

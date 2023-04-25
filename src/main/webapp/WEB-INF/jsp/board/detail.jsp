@@ -173,7 +173,7 @@
  	<c:choose>
 		<c:when test="${sessionScope.username eq board.writer or sessionScope.role eq 'ADMIN'}">
 	 		<a href="<%=request.getContextPath() %>/board/updateForm.do?boardNo=${board.boardNo}">Update</a>
-	 		<a href="<%=request.getContextPath() %>/board/delete.do?boardNo=${board.boardNo}">Delete</a>
+	 		<a href="<%=request.getContextPath() %>/board/delete.do?boardNo=${board.boardNo}&pageNum=${cri.pageNum}&amount=${cri.amount}">Delete</a>
 		</c:when>
 		<c:otherwise>
 		</c:otherwise>

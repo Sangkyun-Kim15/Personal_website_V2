@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import kr.co.mlec.VO.BoardVO;
+import kr.co.mlec.VO.CriteriaVO;
+import kr.co.mlec.VO.PagingVO;
 
 @Controller
 @RequestMapping("/board")
@@ -20,10 +23,13 @@ public class BoardController {
 	
 	
 	@RequestMapping("/select.do")
-	public ModelAndView boardSelect() throws Exception {
+	public ModelAndView boardSelect(CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/list");
-		List<BoardVO> list = service.boardSelect();
+		List<BoardVO> list = service.boardSelectPaging(cri);
 		mav.addObject("list", list);
+		int total = service.getBoardTotalNum(cri);
+		PagingVO paging = new PagingVO(cri, total);
+		mav.addObject("paging", paging);
 		
 		return mav;
 	}
@@ -37,14 +43,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/detail.do")
-	public ModelAndView boardDetail(@RequestParam(value="boardNo") int boardNo) throws Exception {
+	public ModelAndView boardDetail(@RequestParam(value="boardNo") int boardNo, CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/detail");
-		
 		BoardVO board = service.boardDetail(boardNo);
-		//List<CommentVO> list = commentService.commentSelect(boardNo);
 		
-		//mav.addObject("list",list);
 		mav.addObject("board", board);
+		mav.addObject("cri", cri);
 		
 		return mav;
 	}
@@ -59,10 +63,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/delete.do")
-	public ModelAndView boardDelete(@RequestParam(value="boardNo") int boardNo) throws Exception{
+	public ModelAndView boardDelete(@RequestParam(value="boardNo") int boardNo, CriteriaVO cri) throws Exception{
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardDelete(boardNo);
-		mav.setViewName("redirect:select.do?call=D");
+		mav.setViewName("redirect:select.do?pageNum="+ cri.getPageNum() +"&amount="+ cri.getAmount() +"");
 		
 		return mav;
 	}

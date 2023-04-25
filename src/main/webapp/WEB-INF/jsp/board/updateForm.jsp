@@ -38,7 +38,7 @@
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Content</label>
 			<div class="col-sm-10">
-				<textarea id="content" class="form-control" ><c:out value="${board.content}"/></textarea>
+				<textarea id="content" name="content"class="form-control" ><c:out value="${board.content}"/></textarea>
 			</div>
 		</div>
 		<div class="form-group row">

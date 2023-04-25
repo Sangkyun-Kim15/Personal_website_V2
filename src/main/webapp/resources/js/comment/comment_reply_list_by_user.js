@@ -21,8 +21,6 @@ function commentReplyListByUser() {
 	 		let html = "";
 			let totalNum = 0;
 			let postNum = 0;
-			html += "<h3>board<h3/>";
-			 
 			response.forEach(function(board) {
 				if(board.isDeleted == 'N') {
 					postNum++;
@@ -38,10 +36,11 @@ function commentReplyListByUser() {
 				}
 				totalNum++;
 			});
-			html += 	"<h2> " + "Total : " + totalNum + " </h2>";
-			html += 	"<h2> " + "Post : " + postNum + " </h2>";
-			html += 	"<hr>";
 			$('#boardListByUser').html(html);
+			html = "";
+			html += 	"<span> " + "Total : " + totalNum + " </span>";
+			html += 	"<span> " + "Post : " + postNum + " </span>";
+			$('#boardTotal').html(html);
 		});
 	 	/*
 	 	 * add total and post num
@@ -56,7 +55,6 @@ function commentReplyListByUser() {
 			 let html = "";
 			 let totalNum = 0;
 			 let postNum = 0;
-			 html += "<h3>comment<h3/>";
 			 // use if statement
 			 response.forEach(function(comment) {
 				 totalNum++;
@@ -69,11 +67,14 @@ function commentReplyListByUser() {
 				 	html += 	"<span style='cursor: pointer; color: blue' class='commentDel'>Delete </span>";
 				 }
 				 html += 	"<span style='float:right;' align='right'> " + comment.createdDate + " </span>";
+				 html += 	"<hr>";
 				 html += "</div>";
 			 });
+			 $('#comListByUser').html(html);
+			 html = "";
 			 html += 	"<span> " + "Total : " + totalNum + " </span>";
 			 html += 	"<span> " + "Post : " + postNum + " </span>";
-			 $('#comListByUser').html(html);
+			 $('#commentTotal').html(html);
 		 });
 	  });
 }

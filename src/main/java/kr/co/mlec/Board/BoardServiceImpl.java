@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mlec.VO.BoardVO;
+import kr.co.mlec.VO.CriteriaVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -39,7 +40,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> boardSelectByUser(String username) {
+	public List<BoardVO> boardSelectByUser(String username) throws Exception {
 		return boardDAO.boardSelectByUser(username);
+	}
+
+	@Override
+	public int getBoardTotalNum(CriteriaVO cri) throws Exception {
+		return boardDAO.getBoardTotalNum(cri);
+	}
+
+	@Override
+	public List<BoardVO> boardSelectPaging(CriteriaVO cri) throws Exception {
+		return boardDAO.boardSelectPaging(cri);
+	}
+
+	@Override
+	public int getBoardTotalNumByUser(String username) throws Exception {
+		return boardDAO.getBoardTotalNumByUser(username);
 	}
 }
