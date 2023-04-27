@@ -99,6 +99,8 @@
 				</form>
 			</div>
 		</div>
+		<div class="detail_wrap">
+		</div>
 	</div>
 </body>
 </html>
