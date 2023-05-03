@@ -39,7 +39,6 @@ $(document).ready(function() {
 					<div id="commentTotal"></div>
 				</div>
 				<div class="modal-footer">
-					<button id="modalSubmit" type="button" class="btn btn-success">Submit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>

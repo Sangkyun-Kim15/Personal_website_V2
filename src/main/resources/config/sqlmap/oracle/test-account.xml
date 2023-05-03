@@ -14,6 +14,30 @@
 			test_db.account
 	</select>
 	
+	<select id="accountSelectPaging"  parameterType="criteria" resultType="account">
+		SELECT
+			*
+		FROM
+			(
+				SELECT 
+					username, 
+					password,
+					date_format(created_date, '%Y-%M-%D') as createdDate,
+					role,
+					is_deleted as isDeleted
+				FROM
+					test_db.account
+				<if test="keyword != null">
+					WHERE
+						username LIKE concat('%', #{keyword}, '%')
+				</if>
+				ORDER BY
+					username desc
+			) AS T1
+		LIMIT
+			#{skip}, #{amount}
+	</select>
+	
 	<select id="accountDetail" parameterType="String" resultType="account">
 		SELECT
 			username,
@@ -25,5 +49,16 @@
 			test_db.account
 		WHERE
 			username = #{userName}
+	</select>
+	
+	<select id="getAccountTotalNum" parameterType="criteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			test_db.account
+		<if test="keyword != null">
+			WHERE
+				username LIKE concat('%', #{keyword}, '%')
+		</if>
 	</select>
 </mapper>

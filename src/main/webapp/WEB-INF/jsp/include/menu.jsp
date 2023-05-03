@@ -36,7 +36,7 @@
 						%>
 							<li><a href="<%=request.getContextPath() %>/board/select.do">Home</a></li>
 							<li><a href="<%=request.getContextPath() %>/account/logout.do?username=${sessionScope.username}">Logout Test</a></li>
-							<li><a href="<%=request.getContextPath() %>/account/select.do">Admin</a></li>
+							<li><a href="<%=request.getContextPath() %>/account/accountSelectPaging.do">Admin</a></li>
 						
 						<%
 							} else {

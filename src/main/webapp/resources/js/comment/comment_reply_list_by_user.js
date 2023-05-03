@@ -25,7 +25,7 @@ function commentReplyListByUser() {
 				if(board.isDeleted == 'N') {
 					postNum++;
 					html += "<div>";
-					html += 	"<a href='"+ getContextPath() +"/board/detail.do?boardNo="+ board.boardNo +"' target='_blank'><h5 style='display: inline'>" + board.title +"</h5></a>";
+					html += 	"<a href='"+ getContextPath() +"/board/detailAdmin.do?boardNo="+ board.boardNo +"' target='_blank'><h5 style='display: inline'>" + board.title +"</h5></a>";
 					html += 	"<span style='float:right;' align='right'> " + board.regDate + " </span>";
 					html += "</div>";
 				} else {
@@ -42,9 +42,7 @@ function commentReplyListByUser() {
 			html += 	"<span> " + "Post : " + postNum + " </span>";
 			$('#boardTotal').html(html);
 		});
-	 	/*
-	 	 * add total and post num
-	 	 * */
+	 	
 	 	$.ajax({
 			 type: "get",
 			 url: "../comment/commentSelectByUser.json",
@@ -59,7 +57,9 @@ function commentReplyListByUser() {
 			 response.forEach(function(comment) {
 				 totalNum++;
 				 html += "<div>";
+				 html += 	"<input type='hidden' id='comment_from' value='ADMIN'>";
 				 html += 	"<input type='hidden' id='comment_cId' value='" + comment.cId + "'>";
+		         html += 	"<input type='hidden' id='comment_bId' value='" + comment.bId + "'>";
 			     html += 	"<input type='hidden' id='curr_page' value='boardListByUser'>";
 			     html += 	"<h5 style='display: inline'>" + comment.content +"</h5>";
 			     if(comment.isDeleted == "N") {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mlec.VO.AccountVO;
+import kr.co.mlec.VO.CriteriaVO;
 
 @Repository
 public class AccountDAO {
@@ -20,6 +21,14 @@ public class AccountDAO {
 
 	public AccountVO accountDetail(String userName) {
 		return sqlSessionTemplate.selectOne("kr.co.mlec.Account.AccountDAO.accountDetail", userName);
+	}
+
+	public List<AccountVO> accountSelectPaging(CriteriaVO cri) {
+		return sqlSessionTemplate.selectList("kr.co.mlec.Account.AccountDAO.accountSelectPaging", cri);
+	}
+
+	public int getAccountTotalNum(CriteriaVO cri) {
+		return sqlSessionTemplate.selectOne("kr.co.mlec.Account.AccountDAO.getAccountTotalNum", cri);
 	}
 
 }

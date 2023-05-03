@@ -22,7 +22,10 @@
 	<jsp:include page="../include/menu.jsp" />
 	<h2>Updating</h2>
 	<form method="post" action="<%=request.getContextPath()%>/board/update.do">
-		<input type="hidden" name="boardNo" value="${board.boardNo}">
+		<input type="hidden" name="boardNo" value="${cri.boardNo}">
+		<input type="hidden" name="pageNum" value="${cri.pageNum}">
+		<input type="hidden" name="amount" value="${cri.amount}">
+		<input type="hidden" name="keyword" value="${cri.keyword}">
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
 			<div class="col-sm-10">

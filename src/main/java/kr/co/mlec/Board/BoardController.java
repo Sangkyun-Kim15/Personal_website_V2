@@ -53,14 +53,21 @@ public class BoardController {
 		return list;
 	}
 
-	@RequestMapping("/detail.do")
-	public ModelAndView boardDetail(@RequestParam(value = "boardNo") int boardNo, CriteriaVO cri) throws Exception {
+	@RequestMapping("/detail.json")
+	@ResponseBody
+	public BoardVO boardDetail(@RequestParam(value = "boardNo") int boardNo, CriteriaVO cri) throws Exception {
+		BoardVO board = service.boardDetail(boardNo);
+		return board;
+	}
+	
+	@RequestMapping("/detailAdmin.do")
+	@ResponseBody
+	public ModelAndView boardDetailAdmin(@RequestParam(value = "boardNo") int boardNo, CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/detail");
 		BoardVO board = service.boardDetail(boardNo);
-
 		mav.addObject("board", board);
 		mav.addObject("cri", cri);
-
+		
 		return mav;
 	}
 
@@ -77,25 +84,27 @@ public class BoardController {
 	public ModelAndView boardDelete(@RequestParam(value = "boardNo") int boardNo, CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardDelete(boardNo);
-		mav.setViewName("redirect:select.do?pageNum=" + cri.getPageNum() + "&amount=" + cri.getAmount() + "");
+		String keyword = (cri.getKeyword() == null) ? "" : cri.getKeyword();
+		mav.setViewName("redirect:select.do?pageNum=" + cri.getPageNum() + "&amount=" + cri.getAmount() + "&keyword=" + keyword);
 
 		return mav;
 	}
 
 	@RequestMapping("/updateForm.do")
-	public ModelAndView updateForm(@RequestParam(value = "boardNo") int boardNo) throws Exception {
+	public ModelAndView updateForm(CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/updateForm");
-		BoardVO board = service.boardDetail(boardNo);
+		BoardVO board = service.boardDetail(cri.getBoardNo());
 		mav.addObject("board", board);
+		mav.addObject("cri", cri);
 
 		return mav;
 	}
 
 	@RequestMapping("/update.do")
-	public ModelAndView boardUpdate(BoardVO board) throws Exception {
+	public ModelAndView boardUpdate(BoardVO board, CriteriaVO cri) throws Exception {
 		ModelAndView mav = new ModelAndView("board/list");
 		service.boardUpdate(board);
-		mav.setViewName("redirect:select.do?call=U");
+		mav.setViewName("redirect:select.do?boardNo=" + cri.getBoardNo() + "&pageNum=" + cri.getPageNum() + "&amount=" + cri.getAmount() + "&keyword=" + cri.getKeyword());
 
 		return mav;
 	}
@@ -117,6 +126,7 @@ public class BoardController {
 			byte[] bytes = upload.getBytes();
 
 			// make image path
+			// need to change path (server)
 			String path = "C:\\Users\\sangkyun\\Desktop\\new" + "ckImage/";
 			String ckUploadPath = path + uid + "_" + fileName;
 			File folder = new File(path);
@@ -132,7 +142,7 @@ public class BoardController {
 			out.write(bytes);
 			out.flush();
 
-			String callback = req.getParameter("CKEditorFuncNum");
+			// String callback = req.getParameter("CKEditorFuncNum");
 			printWriter = res.getWriter();
 			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
 

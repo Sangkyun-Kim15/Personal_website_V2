@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.mlec.VO.AccountVO;
+import kr.co.mlec.VO.CriteriaVO;
+import kr.co.mlec.VO.PagingVO;
 
 @Controller
 @RequestMapping("/account")
@@ -38,6 +40,18 @@ public class AccountController {
 		ModelAndView mav = new ModelAndView("admin/admin_user");
 		List<AccountVO> list = accountService.select();
 		mav.addObject("list", list);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/accountSelectPaging.do")
+	public ModelAndView accountSelect(CriteriaVO cri) throws Exception {
+		ModelAndView mav = new ModelAndView("admin/admin_user");
+		List<AccountVO> list = accountService.accountSelectPaging(cri);
+		int total = accountService.getAccountTotalNum(cri);
+		PagingVO paging = new PagingVO(cri, total);
+		mav.addObject("list", list);
+		mav.addObject("paging", paging);
 		
 		return mav;
 	}

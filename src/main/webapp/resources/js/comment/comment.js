@@ -10,9 +10,12 @@ $(document).on("click", ".reCommentCloseBtn", function() {
 $(document).on("click", ".commentDel", function() {
 	// comment delete
 	const _this = $(this);
+	const bId =  $(this).siblings('#comment_bId').val();
 	const cId =  $(this).siblings('#comment_cId').val();
 	const currPage = $(this).siblings('#curr_page').val();
+	const from = $(this).siblings('#comment_from').val();
 	
+	console.log(from);
 	$.ajax({
 		url: "../comment/commentDelete.json",
         dataType: "json",
@@ -25,8 +28,12 @@ $(document).on("click", ".commentDel", function() {
     	console.log("fail");
     })
     .always(function() {
+    	if(from == "BOARD") {
+    		commentList(bId);
+    	} else if(from == "ADMIN") {
+    		location.reload();
+    	}
     	console.log("always");
-    	history.go(0);
     })
 });
 
@@ -47,12 +54,13 @@ $(document).on("click", ".reCommentSubmit", function () {
     .done(function() {
     	let html = "";
     	console.log("success");
-    	commentList();
+    	commentList(bId);
     })
     .fail(function() {
     	console.log("fail");
     })
     .always(function() {
     	console.log("always");
+    	
     })
 });

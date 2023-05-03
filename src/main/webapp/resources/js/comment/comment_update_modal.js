@@ -2,10 +2,17 @@ $(document).on("click", "#modalSubmit", function() {
 		const user = $("#userName").val();
 		const content = $("#content").val();
 		const cId = $("#cId").val();
+		
+		let bId = document.getElementById("comment_bId").value;
+		let pageNum = document.getElementById("pageNum").value;
+		let amount = document.getElementById("amount").value;
+		let keyword = document.getElementById("keyword").value;
 
+		console.log(document.getElementById("comment_bId").value);
 		console.log(cId);
 		console.log(user);
 		console.log(content);
+		console.log(document.getElementById("pageNum").value);
 		
 		$.ajax({
             url: "../comment/commentUpdate.json",
@@ -21,7 +28,9 @@ $(document).on("click", "#modalSubmit", function() {
         })
         .always(function() {
         	console.log("always");
-        	location.reload();
+        	let url = "../board/select.do?boardNo="+bId+"&pageNum="+pageNum+"&amount="+amount+"&keyword="+keyword;
+        	console.log(url);
+        	location.replace(url);
         })
 	});
 

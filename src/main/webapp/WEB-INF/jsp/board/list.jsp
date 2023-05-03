@@ -6,17 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Blog test</title>
-<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style type="text/css">
 .pageInfo {
 	list-style: none;
@@ -33,10 +22,40 @@
 }
 
 </style>
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- boardDetail.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board/boardDetail.js"></script>
+<!-- commen_list.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment_list.js"></script>
+<!-- comment.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment.js"></script>
+<!-- modal.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment_update_modal.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	boardDetail(${paging.cri.boardNo});
+	commentList(${paging.cri.boardNo});
+});
+</script>
 </head>
 <body>
 	<jsp:include page="../include/menu.jsp" />
+	<jsp:include page="../board/comment_update_modal.jsp" />
 	<div class="table_wrap">
+		<input type="hidden" id="username" value='${sessionScope.username}'/>
+		<input type="hidden" id="role" value='${sessionScope.role}'/>
 		<table class="table">
 			<tr>
 				<td><strong>No</strong></td>
@@ -45,14 +64,18 @@
 				<td><strong>Date</strong></td>
 			</tr>
 			<c:forEach var="board" items="${list}">
+				<input type="hidden" id="boardNo" value='<c:out value="${board.boardNo}"/>'/>
+				
 				<tr>
 					<td><c:out value="${board.boardNo}"></c:out></td>
-					<td><a
-						href="<%=request.getContextPath()%>/board/detail.do?boardNo=${board.boardNo}&pageNum=${paging.cri.pageNum}&amount=${paging.cri.amount}"><c:out
+					<td><a onclick="boardDetail(${board.boardNo}); commentList(${board.boardNo})"><c:out
 								value="${board.title}"></c:out></a></td>
 					<td><c:out value="${board.writer}"></c:out></td>
 					<td><c:out value="${board.regDate}"></c:out></td>
 				</tr>
+				<input type="hidden" id="pageNum" value='<c:out value="${paging.cri.pageNum}"/>'/>
+				<input type="hidden" id="amount" value='<c:out value="${paging.cri.amount}"/>'/>
+				<input type="hidden" id="keyword" value='<c:out value="${paging.cri.keyword}"/>'/>
 			</c:forEach>
 		</table>
 		<br />
@@ -99,8 +122,9 @@
 				</form>
 			</div>
 		</div>
-		<div class="detail_wrap">
-		</div>
+		
+		<div id="detail_wrap"></div>
+		<div id="commentList"></div>
 	</div>
 </body>
 </html>

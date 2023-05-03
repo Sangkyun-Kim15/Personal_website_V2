@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.mlec.VO.CommentVO;
+import kr.co.mlec.VO.CriteriaVO;
 
 @Controller
 @RequestMapping("/comment")
@@ -36,22 +37,21 @@ public class CommentController {
 	}
 	
 	@RequestMapping("/insert.do")
-	public ModelAndView commentInsert(CommentVO comment) throws Exception {
-		ModelAndView mav = new ModelAndView("board/detail");
+	public ModelAndView commentInsert(CommentVO comment, CriteriaVO cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		cri.setBoardNo(comment.getbId());
 		commentService.commentInsert(comment);
-		mav.setViewName("redirect:/board/detail.do");
-		mav.addObject("boardNo", comment.getbId());
+		mav.setViewName("redirect:../board/select.do?boardNo=" + cri.getBoardNo() + "&pageNum=" + cri.getPageNum() + "&amount=" + cri.getAmount() + "&keyword=" + cri.getKeyword());
 		return mav;
 	}
+	
 	@ResponseBody
 	@RequestMapping("/commentDelete.json")
 	public String commentDelete(int cId) throws Exception {
 		commentService.commentDelete(cId);
 		return null;
 	}
-	/*
-	 *  change return type to check return data
-	 * */
+	
 	@ResponseBody
 	@RequestMapping("/commentUpdate.json")
 	public String commentUpdate(CommentVO comment) throws Exception {
