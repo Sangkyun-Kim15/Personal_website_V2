@@ -21,6 +21,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment.js"></script>
 <!-- comment.js file -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment_reply_list_by_user.js"></script>
+<!-- get_context_path.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/include/get_context_path.js"></script>
 <script>
 	$(document).ready(function() {
 		commentReplyListByUser();

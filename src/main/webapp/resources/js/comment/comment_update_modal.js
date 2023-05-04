@@ -3,17 +3,11 @@ $(document).on("click", "#modalSubmit", function() {
 		const content = $("#content").val();
 		const cId = $("#cId").val();
 		
-		let bId = document.getElementById("comment_bId").value;
-		let pageNum = document.getElementById("pageNum").value;
-		let amount = document.getElementById("amount").value;
-		let keyword = document.getElementById("keyword").value;
+		const bId = document.getElementById("comment_bId").value;
+		const pageNum = document.getElementById("pageNum").value;
+		const amount = document.getElementById("amount").value;
+		const keyword = document.getElementById("keyword").value;
 
-		console.log(document.getElementById("comment_bId").value);
-		console.log(cId);
-		console.log(user);
-		console.log(content);
-		console.log(document.getElementById("pageNum").value);
-		
 		$.ajax({
             url: "../comment/commentUpdate.json",
 	        dataType: "json",
@@ -42,11 +36,7 @@ $(document).on("click", ".commentMod", function() {
 	const comment_text = $(this).siblings('.comment_container').children('h5').text();
 	const comment_user = $(this).siblings('b').text();
 	
-	console.log(cId);
-	console.log(comment_text);
-	console.log(comment_user);
 	$("#userName").val(comment_user);
 	$("#content").val(comment_text);
 	$("#cId").val(cId);
-	
 });

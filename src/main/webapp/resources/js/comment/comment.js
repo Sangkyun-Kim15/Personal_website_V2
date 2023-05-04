@@ -64,3 +64,35 @@ $(document).on("click", ".reCommentSubmit", function () {
     	
     })
 });
+
+function commentInsert() {
+	const bId = document.getElementById("bId").value;
+	const pageNum = document.getElementById("pageNum").value;
+	const amount = document.getElementById("amount").value;
+	const keyword = document.getElementById("keyword").value;
+	const content = document.getElementById("content").value;
+	const user = document.getElementById("user").value;
+	
+	$.ajax({
+		 type: "POST",
+		 url: "../comment/commentInsert.json",
+		 data: {
+			 	"bId":bId,
+			 	"user":user,
+			 	"content":content
+			    }
+	 })
+	 .done(function(response) {
+		 alert(response);
+		 let url = "../board/select.do?boardNo="+bId+"&pageNum="+pageNum+"&amount="+amount+"&keyword="+keyword;
+		 location.replace(url);
+	 })
+	 .fail(function() {
+		 console.log("2");
+		 alert("fail");
+		 
+	 })
+	 .always(function() {
+		 console.log("3");
+	 });
+}

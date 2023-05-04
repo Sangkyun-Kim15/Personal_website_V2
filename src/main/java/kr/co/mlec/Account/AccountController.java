@@ -30,7 +30,8 @@ public class AccountController {
 		AccountVO accountDetail = accountService.accountDetail(username);
 		session.setAttribute("username", username);
 		session.setAttribute("role", accountDetail.getRole());
-		ModelAndView mav = new ModelAndView("main");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:../board/select.do");
 		
 		return mav;
 	}
@@ -68,6 +69,6 @@ public class AccountController {
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		
-		return "redirect:/main.do";
+		return "redirect:../board/select.do";
 	}
 }

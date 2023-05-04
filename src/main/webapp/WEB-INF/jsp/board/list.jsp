@@ -41,7 +41,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment.js"></script>
 <!-- modal.js file -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/comment/comment_update_modal.js"></script>
-
+<!-- get_context_path.js file -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/include/get_context_path.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -87,41 +88,12 @@ $(document).ready(function() {
 			</c:otherwise>
 		</c:choose>
 
-
-		<div class="pageInfo_wrap">
-			<div class="pageInfo_area">
-				<ul id="pageInfo" class="pageInfo">
-
-					<!-- 이전페이지 버튼 -->
-					<c:if test="${paging.prev}">
-						<li class="pageInfo_btn previous"><a
-							href="<%=request.getContextPath() %>/board/select.do?pageNum=${paging.startPage - 1}&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">Previous</a></li>
-					</c:if>
-
-					<!-- 각 번호 페이지 버튼 -->
-					<c:forEach var="num" begin="${paging.startPage}"
-						end="${paging.endPage}">
-						<li class="pageInfo_btn"><a
-							href="<%=request.getContextPath() %>/board/select.do?pageNum=${num}&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">${num}</a></li>
-					</c:forEach>
-
-					<!-- 다음페이지 버튼 -->
-					<c:if test="${paging.next}">
-						<li class="pageInfo_btn next"><a
-							href="<%=request.getContextPath() %>/board/select.do?pageNum=${paging.endPage + 1 }&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">Next</a></li>
-					</c:if>
-				</ul>
-			</div>
-		</div>
-
-		<div class="search_wrap">
-			<div class="search_area">
-				<form method="post" action="<%=request.getContextPath()%>/board/select.do">
-					<input type="text" name="keyword" value="${paging.cri.keyword}">
-					<button type="submit">Search</button>
-				</form>
-			</div>
-		</div>
+		<jsp:include page="../include/paging.jsp" >
+			<jsp:param value="board" name="type"/>
+		</jsp:include>
+		<jsp:include page="../include/searching.jsp" >
+			<jsp:param value="board" name="type"/>
+		</jsp:include>
 		
 		<div id="detail_wrap"></div>
 		<div id="commentList"></div>

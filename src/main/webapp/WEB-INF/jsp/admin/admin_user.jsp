@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,39 +53,13 @@
 		</c:forEach>
 	</table>
 	
-	<div class="pageInfo_wrap">
-		<div class="pageInfo_area">
-			<ul id="pageInfo" class="pageInfo">
+	<jsp:include page="../include/paging.jsp" >
+		<jsp:param value="account" name="type"/>
+	</jsp:include>
+	<jsp:include page="../include/searching.jsp" >
+		<jsp:param value="account" name="type"/>
+	</jsp:include>
 	
-				<!-- 이전페이지 버튼 -->
-				<c:if test="${paging.prev}">
-					<li class="pageInfo_btn previous"><a
-						href="<%=request.getContextPath() %>/account/accountSelectPaging.do?pageNum=${paging.startPage - 1}&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">Previous</a></li>
-				</c:if>
 	
-				<!-- 각 번호 페이지 버튼 -->
-				<c:forEach var="num" begin="${paging.startPage}"
-					end="${paging.endPage}">
-					<li class="pageInfo_btn"><a
-						href="<%=request.getContextPath() %>/account/accountSelectPaging.do?pageNum=${num}&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">${num}</a></li>
-				</c:forEach>
-	
-				<!-- 다음페이지 버튼 -->
-				<c:if test="${paging.next}">
-					<li class="pageInfo_btn next"><a
-						href="<%=request.getContextPath() %>/account/accountSelectPaging.do?pageNum=${paging.endPage + 1 }&amount=${paging.cri.amount}&keyword=${paging.cri.keyword}">Next</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-	
-	<div class="search_wrap">
-			<div class="search_area">
-				<form method="post" action="<%=request.getContextPath()%>/account/accountSelectPaging.do">
-					<input type="text" name="keyword" value="${paging.cri.keyword}">
-					<button type="submit">Search</button>
-				</form>
-			</div>
-		</div>
 </body>
 </html>
