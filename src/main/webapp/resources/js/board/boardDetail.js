@@ -17,7 +17,7 @@ function boardDetail(input) {
 		data = document.getElementById("boardNo").value;
 	} else {
 		data = input;
-	}
+	} 
 	
 	$.ajax({
 		type: "get",
