@@ -127,8 +127,7 @@ public class BoardController {
 
 			// make image path
 			// need to change path (server)
-			// String path = "C:\\Users\\sangkyun\\Desktop\\new" + "ckImage/";
-			String path = "/images/board";
+			String path = "C:\\Users\\sangkyun\\Desktop\\new" + "ckImage/";
 			String ckUploadPath = path + uid + "_" + fileName;
 			File folder = new File(path);
 
@@ -170,8 +169,7 @@ public class BoardController {
 	@RequestMapping("/imageSubmit.do")
 	public void imageSubmit(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName,
 			HttpServletRequest req, HttpServletResponse res) throws Exception {
-		// String path = "C:\\Users\\sangkyun\\Desktop\\new" + "ckImage/";
-		String path = "/images/board";
+		String path = "C:\\Users\\sangkyun\\Desktop\\new" + "ckImage/";
 		String sDirPath = path + uid + "_" + fileName;
 		
 		File imgFile = new File(sDirPath);
