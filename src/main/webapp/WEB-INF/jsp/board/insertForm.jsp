@@ -40,9 +40,7 @@
 			<label for="inputEmail3" class="col-sm-2 col-form-label">Content</label>
 			<div class="col-sm-10">
 				<textarea id="content" name="content"></textarea>
-				<script type="text/javascript">
-					CKEDITOR.replace('content', {filebrowserUploadUrl: "${pageContext.request.contextPath}/board/imageUpload.do"});
-				</script>
+					
 			</div>
 		</div>
 		<div class="form-group row">
@@ -52,7 +50,7 @@
     	</div>
 	</form>
 	<script type="text/javascript">
-		CKEDITOR.replace('content');
+		CKEDITOR.replace('content', {filebrowserUploadUrl: "${pageContext.request.contextPath}/board/imageUpload.do"});
 	</script>
 </body>
 </html>

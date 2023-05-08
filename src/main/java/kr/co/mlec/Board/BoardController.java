@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -112,6 +116,15 @@ public class BoardController {
 	@RequestMapping("/imageUpload.do")
 	public void imageUpload(HttpServletRequest req, HttpServletResponse res, MultipartHttpServletRequest multiFile,
 			MultipartFile upload) throws Exception {
+		/*
+		Resource targetDir = new FileSystemResource("/boardImage");
+		
+		if(!targetDir.exists()) {
+			Files.createDirectories(Paths.get("/boardImage"));
+		}
+		*/
+		
+		
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -129,7 +142,7 @@ public class BoardController {
 			// need to change path (server)
 			String path = "/boardImage";
 			String ckUploadPath = path + uid + "_" + fileName;
-			/*
+			
 			File folder = new File(path);
 
 			if (!folder.exists()) {
@@ -139,7 +152,6 @@ public class BoardController {
 					// TODO: handle exception
 				}
 			}
-			 * */
 			out = new FileOutputStream(new File(ckUploadPath));
 			out.write(bytes);
 			out.flush();
@@ -148,7 +160,7 @@ public class BoardController {
 			printWriter = res.getWriter();
 			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
 
-			printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
+			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ fileUrl +"\"}");
 			printWriter.flush();
 
 		} catch (Exception e) {
