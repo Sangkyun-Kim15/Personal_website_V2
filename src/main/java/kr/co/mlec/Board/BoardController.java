@@ -187,6 +187,7 @@ public class BoardController {
 				e2.printStackTrace();
 			}
 		}
+		return;
 	}
 
 	@RequestMapping("/imageSubmit.do")
