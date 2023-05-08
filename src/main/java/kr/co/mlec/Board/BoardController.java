@@ -157,10 +157,10 @@ public class BoardController {
 
 			// String callback = req.getParameter("CKEditorFuncNum");
 			
-			String fileUrl = "/opt/tomcat/webapps/" + req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
+			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
 
 			printWriter = res.getWriter();
-			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ fileUrl +"\"}");
+			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ ckUploadPath +"\"}");
 			printWriter.flush();
 
 		} catch (Exception e) {
