@@ -128,6 +128,8 @@ public class BoardController {
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
+		printWriter = res.getWriter();
+		
 
 		// encoding
 		res.setCharacterEncoding("utf-8");
@@ -140,8 +142,15 @@ public class BoardController {
 
 			// make image path
 			// need to change path (server)
-			String path = "/boardImage";
-			String ckUploadPath = path + uid + "_" + fileName;
+			String path = "/images/board";
+			String ckUploadPath = path + "/" + uid + "_" + fileName;
+			
+			/*
+			printWriter.println("<script language='javascript'>");
+			printWriter.println("alert("+ ckUploadPath +")");
+			printWriter.println("</script>");
+			printWriter.flush();
+			 */
 			
 			File folder = new File(path);
 
@@ -155,9 +164,10 @@ public class BoardController {
 			out = new FileOutputStream(new File(ckUploadPath));
 			out.write(bytes);
 			out.flush();
+			out.flush();
 
 			// String callback = req.getParameter("CKEditorFuncNum");
-			printWriter = res.getWriter();
+			
 			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
 
 			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ fileUrl +"\"}");
@@ -177,7 +187,6 @@ public class BoardController {
 				e2.printStackTrace();
 			}
 		}
-		return;
 	}
 
 	@RequestMapping("/imageSubmit.do")
