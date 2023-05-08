@@ -193,8 +193,8 @@ public class BoardController {
 	@RequestMapping("/imageSubmit.do")
 	public void imageSubmit(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName,
 			HttpServletRequest req, HttpServletResponse res) throws Exception {
-		String path = "/boardImage"; 
-		String sDirPath = path + uid + "_" + fileName;
+		String path = "/images/board"; 
+		String sDirPath = path + "/" + uid + "_" + fileName;
 		
 		File imgFile = new File(sDirPath);
 		
