@@ -116,20 +116,10 @@ public class BoardController {
 	@RequestMapping("/imageUpload.do")
 	public void imageUpload(HttpServletRequest req, HttpServletResponse res, MultipartHttpServletRequest multiFile,
 			MultipartFile upload) throws Exception {
-		/*
-		Resource targetDir = new FileSystemResource("/boardImage");
-		
-		if(!targetDir.exists()) {
-			Files.createDirectories(Paths.get("/boardImage"));
-		}
-		*/
-		
 		
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
-		printWriter = res.getWriter();
-		
 
 		// encoding
 		res.setCharacterEncoding("utf-8");
@@ -164,12 +154,12 @@ public class BoardController {
 			out = new FileOutputStream(new File(ckUploadPath));
 			out.write(bytes);
 			out.flush();
-			out.flush();
 
 			// String callback = req.getParameter("CKEditorFuncNum");
 			
-			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
+			String fileUrl = "/opt/tomcat/webapps/" + req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
 
+			printWriter = res.getWriter();
 			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ fileUrl +"\"}");
 			printWriter.flush();
 
