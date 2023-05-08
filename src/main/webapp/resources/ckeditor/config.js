@@ -22,6 +22,5 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about', groups: [ 'about' ] }
 	];
 
-	config.removeButtons = 'Save',
-	config.filebrowserUploadMethod = 'form';
+	config.removeButtons = 'Save';
 };

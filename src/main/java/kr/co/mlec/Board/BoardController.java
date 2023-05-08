@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
+
 import kr.co.mlec.VO.BoardVO;
 import kr.co.mlec.VO.CriteriaVO;
 import kr.co.mlec.VO.PagingVO;
@@ -134,14 +136,6 @@ public class BoardController {
 			// need to change path (server)
 			String path = "/images/board";
 			String ckUploadPath = path + "/" + uid + "_" + fileName;
-			
-			/*
-			printWriter.println("<script language='javascript'>");
-			printWriter.println("alert("+ ckUploadPath +")");
-			printWriter.println("</script>");
-			printWriter.flush();
-			 */
-			
 			File folder = new File(path);
 
 			if (!folder.exists()) {
@@ -149,18 +143,25 @@ public class BoardController {
 					folder.mkdirs();
 				} catch (Exception e) {
 					// TODO: handle exception
+					e.getStackTrace();
 				}
 			}
+			// save image
 			out = new FileOutputStream(new File(ckUploadPath));
 			out.write(bytes);
 			out.flush();
 
-			// String callback = req.getParameter("CKEditorFuncNum");
 			
-			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
-
+			//String callback = req.getParameter("CKEditorFuncNum");
 			printWriter = res.getWriter();
-			printWriter.println("{\"filename\":\""+ fileName +"\",\"uploaded\":1, \"url\":\""+ ckUploadPath +"\"}");
+			String fileUrl = req.getContextPath() + "/board/imageSubmit.do?uid=" + uid + "&fileName=" + fileName;
+			
+			JsonObject json = new JsonObject();
+			json.addProperty("filename", fileName);
+			json.addProperty("uploaded", 1);
+			json.addProperty("url", fileUrl);
+
+			printWriter.println(json);
 			printWriter.flush();
 
 		} catch (Exception e) {
