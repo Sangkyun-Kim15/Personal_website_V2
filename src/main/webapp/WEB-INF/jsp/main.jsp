@@ -7,9 +7,6 @@
 <title>Portfolio page</title>
 </head>
 <body>
-<!-- 
-	포트폴리오 페이지
--->
 	<header>
 	</header>
 	<div id="content">
