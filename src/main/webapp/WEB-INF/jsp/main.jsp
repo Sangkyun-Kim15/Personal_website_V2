@@ -7,6 +7,13 @@
 <title>Portfolio page</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/board/select.do" target="_blank">blog test</a>	
+<!-- 
+	포트폴리오 페이지
+-->
+	<header>
+	</header>
+	<div id="content">
+		<a href="<%=request.getContextPath() %>/board/select.do" target="_blank">blog test</a>	
+	</div>
 </body>
 </html>
