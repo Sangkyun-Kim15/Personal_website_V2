@@ -98,7 +98,7 @@ a:hover {
 </head>
 <body>
 	<video
-		src="file:/video/main/coverr-golden-gate-bridge-at-sunset-5420-original.mp4"
+		src="/videos/coverr-golden-gate-bridge-at-sunset-5420-original.mp4"
 		muted autoplay loop></video>
 	<div id="content">
 		<h2 id="title">Sangkyun's portfolio</h2>
